@@ -11,10 +11,9 @@ function App() {
 
   useEffect(() => {
     loadAnimals()
-  }, []); // second argument makes useEffect run on page load
+  }, []); // second argument makes useEffect run on page load & will run on whatever state is in there if any
 
-  const loadAnimals = () => {
-    const getAnimals = async () => {
+    const loadAnimals = async () => {
       setIsLoading(true)
       fetch('https://zoo-animal-api.herokuapp.com/animals/rand/10')
         .then(response => response.json())
@@ -23,8 +22,6 @@ function App() {
         )
       setIsLoading(false)
     }
-    getAnimals()
-  }
 
   return (
     <div className="App">
