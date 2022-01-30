@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Home from './components/Home'
+import './App.css'
 
 function App() {
+  // TODO add loading spinner
+  const [isLoading, setIsLoading] = useState(false);
+  const [animals, setAnimals] = useState([]);
+
+  useEffect(() => {
+    loadAnimals()
+  }, []); // second argument makes useEffect run on page load
+
+  const loadAnimals = () => {
+    const getAnimals = async () => {
+      setIsLoading(true)
+      fetch('https://zoo-animal-api.herokuapp.com/animals/rand/10')
+        .then(response => response.json())
+        .then(
+        (result) => setAnimals([...result])
+        )
+      setIsLoading(false)
+    }
+    getAnimals()
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Header loadAnimals={loadAnimals}/>
+        <Home animals={animals} isLoading={isLoading} />
+        <Footer />
     </div>
   );
 }
