@@ -9,8 +9,6 @@ function App() {
   // TODO add loading spinner
   // Styling
   const StyledDiv = styled.div`
-    /* display: flex; */
-    /* justify-content: center; */
     min-height: 100vh;
     margin: 0;
     background: linear-gradient(hsla(216, 92%, 73%, 1), hsla(95, 62%, 65%, 1));
