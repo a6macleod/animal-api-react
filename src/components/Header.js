@@ -1,11 +1,13 @@
+import Button from './Button'
 import styled from 'styled-components'
 
 const Header = ({ loadAnimals }) => {
   const StyledDiv = styled.div`
+    max-width: 1200px;
     display: flex;
     justify-content: space-between;
     max-width: 100%;
-    margin: 40px;
+    padding: 40px;
     ul {
       display: flex;
     }
@@ -19,14 +21,13 @@ const Header = ({ loadAnimals }) => {
       }
     a:hover {
       text-decoration: underline;
-
     }
   `;
 
   return(
     <StyledDiv>
-      <h1>Learn about Animals!</h1>
-      <button onClick={loadAnimals}>Load New Animals!</button>
+      <h1>Animals Facts!</h1>
+      <Button loadAnimals={loadAnimals} />
     </StyledDiv>
   );
 }

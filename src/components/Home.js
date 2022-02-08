@@ -2,6 +2,7 @@ import Styled from 'styled-components'
 
 const Home = ({ animals, isLoading }) => {
   const StyledDiv = Styled.div`
+    max-width: 1200px;
     margin: 0 4rem 0 4rem;
     ul {
       display: grid;
@@ -34,9 +35,8 @@ const Home = ({ animals, isLoading }) => {
       }
     }
     img {
-      max-width: 30rem;
-      height: 100%;
-      overflow: hidden;
+      object-fit: cover;
+      max-width: 35rem;
     }
     .loading {
     align-self: center;
@@ -59,7 +59,41 @@ const Home = ({ animals, isLoading }) => {
         }
       }
     }
-    /* screen size media queries */
+    /* screen size media queries for responsivness */
+    @media (max-width: 817px) {
+      img {
+        max-width: 40rem;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .card {
+        height: 18rem;
+      }
+      img {
+        max-width: 30rem;
+      }
+    }
+    @media (max-width: 500px) {
+      .card {
+        height: 15rem
+      }
+      img {
+        max-width: 25rem;
+      }
+    }
+
+    @media (max-width: 450px) {
+      ul {
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+      }
+      .card {
+        height: 10rem
+      }
+      img {
+        max-width: 15rem;
+      }
+    }
   `;
 
   return isLoading ? (<h2 className='loading'>...Loading Animals</h2>) : (
