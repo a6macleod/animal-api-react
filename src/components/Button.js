@@ -13,6 +13,8 @@ const Button = ({ loadAnimals }) => {
       background-color: hsla(276, 67%, 56%, 1);
       transform: scale(1.1);
     }
+    /* change button sizes */
+
   `;
 
   return (

@@ -4,6 +4,7 @@ const Home = ({ animals, isLoading }) => {
   const StyledDiv = Styled.div`
     max-width: 1200px;
     margin: 0 4rem 0 4rem;
+    /* card grid list */
     ul {
       display: grid;
       gap: 10px;
@@ -15,19 +16,22 @@ const Home = ({ animals, isLoading }) => {
       align-items: center;
       border: 1px solid black;
     }
+    /* individual cards */
     .card {
       cursor: pointer;
       height: 20rem;
       overflow: hidden;
+      position: relative;
     }
     .info {
       position: absolute;
       display: none;
       width: 20rem;
       color: #fff;
+      ul {
+        padding: 1rem;
+      }
       li {
-        border: none;
-        padding: 0;
         display: inline;
       }
       span {
@@ -42,7 +46,7 @@ const Home = ({ animals, isLoading }) => {
     align-self: center;
   }
     /* on hover: add overlay and show animal info */
-    .card:hover {
+    .card:hover, .clicked {
       img {
         opacity: 0.2;
       }
@@ -73,6 +77,10 @@ const Home = ({ animals, isLoading }) => {
       img {
         max-width: 30rem;
       }
+      .info {
+        font-size: 0.9rem;
+        max-width: 15rem;
+      }
     }
     @media (max-width: 500px) {
       .card {
@@ -81,6 +89,9 @@ const Home = ({ animals, isLoading }) => {
       img {
         max-width: 25rem;
       }
+      .info {
+        font-size: 0.7rem;
+      }
     }
 
     @media (max-width: 450px) {
@@ -88,24 +99,35 @@ const Home = ({ animals, isLoading }) => {
         grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
       }
       .card {
-        height: 10rem
+        height: 12rem
       }
       img {
         max-width: 15rem;
       }
+      .info {
+        font-size: 0.6rem;
+      }
+      }
     }
   `;
+
+  function toggleInfo(id) {
+    const target = document.getElementById(id);
+    if (target.classList.contains('clicked')) {
+      target.classList.remove('clicked')
+    } else {
+      target.classList.add('clicked')
+    }
+  }
+
 
   return isLoading ? (<h2 className='loading'>...Loading Animals</h2>) : (
     <StyledDiv>
       <ul>
       {animals.map((animal) => (
-        <li key={animal.id} className='card'>
-        <div className='mask'>
-          <img src={animal.image_link} alt={animal.name} />
-        </div>
+        <li key={animal.id} id={animal.id} className='card' onClick={() => toggleInfo(animal.id)}>
           <div className='info'>
-            <ul>
+          <ul>
               <li><h3>{animal.name}</h3></li>
               <li><span>Latin name:</span> {animal.latin_name}</li>
               <li><span>Type:</span> {animal.animal_type}</li>
@@ -115,7 +137,11 @@ const Home = ({ animals, isLoading }) => {
               <li><span>Diet:</span> {animal.diet}</li>
               <li><span>Located in:</span> {animal.geo_range}</li>
             </ul>
+            </div>
+          <div className='mask'>
+            <img src={animal.image_link} alt={animal.name} />
           </div>
+
 
         </li>
       ))}
