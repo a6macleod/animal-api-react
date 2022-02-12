@@ -16,6 +16,7 @@ const Button = ({ loadAnimals }) => {
     /* button sizes */
     @media (max-width: 700px) {
       font-size: 0.7rem;
+      height: 75%;
     }
   `;
 
